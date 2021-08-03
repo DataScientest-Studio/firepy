@@ -21,9 +21,7 @@ Construction d’un algorithme de détection automatique des zones brûlées (in
 ## :page_with_curl: Jeux de données :page_with_curl:
 Les satellites Sentinel 2A et 2B réalisent des acquisitions dans le domaine optique depuis 2015 (https://fr.wikipedia.org/wiki/Sentinel-2 ). Financées par le programme européen Copernicus, ces missions permettent de produire des images entièrement libres sans restriction d’usage ou de profil d’utilisateur (https://sentinel2.cnes.fr/fr).
 La résolution spatiale est de 20 m, une image Sentinel 2 se compose d’un peu plus de 30 millions de pixels.
-
-## :bookmark_tabs: Description des fichiers :bookmark_tabs:
--	L’ensemble des caractéristiques techniques des images Sentinel 2 est présenté ici : 
+L’ensemble des caractéristiques techniques des images Sentinel 2 est présenté ici : 
 https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-2-msi/msi-instrument
 
 Les caractéristiques des bandes spectrales
@@ -39,6 +37,9 @@ peps.cnes.fr/
 https://catalogue.theia-land.fr/
 https://earthexplorer.usgs.gov/
 Pour notre étude, on privilégiera tant que possible le niveau L2A, toutefois ces images sont plus longues à obtenir que le niveau inférieur.
+
+## :bookmark_tabs: Description des fichiers :bookmark_tabs:
+-	
 
 
 
