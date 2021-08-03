@@ -14,6 +14,8 @@ Construction d’un algorithme de détection automatique des zones brûlées (in
 - Application du modèle sur d’autres dates et d’autres lieux (Australie)
 - Calcul du Burn Severity par diachronie (entre deux dates, comme illustré ci-dessous)
 - Récupération de données géographiques vecteur (polygones) de contour des zones brûlées détectées.
+
+   ![exemple.jpg](https://raw.githubusercontent.com/DataScientest-Studio/firepy/main/exemple.jpg?token=AHPOTTHVED75FDOAWCFXHDLBBCEJI)
  
 ## :page_with_curl: Jeux de données :page_with_curl:
 Les satellites Sentinel 2A et 2B réalisent des acquisitions dans le domaine optique depuis 2015 (https://fr.wikipedia.org/wiki/Sentinel-2 ). Financées par le programme européen Copernicus, ces missions permettent de produire des images entièrement libres sans restriction d’usage ou de profil d’utilisateur (https://sentinel2.cnes.fr/fr).
