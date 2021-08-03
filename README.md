@@ -2,7 +2,8 @@
 
 ## :mage: Contexte :mage:
 Ce projet a été réalisé dans le cadre de la formation Data Scientist de [Datascientest](https://datascientest.com/) (promotion continue Juin 2021) 
-Objectif
+
+## :dart: Objectif :dart:
 Construction d’un algorithme de détection automatique des zones brûlées (incendie) par Deep-Learning appliqué à des images optiques Sentinel 2.
 
 ## :heavy_check_mark: Les étapes théoriques :heavy_check_mark:
