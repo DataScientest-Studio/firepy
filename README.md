@@ -33,8 +33,6 @@ La nature des données d’entrée a nécessité une montée en compétences sur
 Enfin, afin de pouvoir travailler en collaboratif sur un environnement permettant les calculs de deep learning, nous avons utilisé les outils Google (Drive, Colab, Google Earth Engine) ainsi qu’un espace Github dédié.
 
 
-   ![exemple.jpg](https://github.com/DataScientest-Studio/firepy/blob/01dc7975c51abd21e72d47f828e7672913d1049b/exemple.jpg)
- 
 ## :page_with_curl: Description des données des satellites Sentinel 2 :page_with_curl:
 Les satellites Sentinel 2A et 2B réalisent des acquisitions dans le domaine optique depuis 2015 (https://fr.wikipedia.org/wiki/Sentinel-2 ). Financées par le programme européen Copernicus, ces missions permettent de produire des images entièrement libres sans restriction d’usage ou de profil d’utilisateur (https://sentinel2.cnes.fr/fr).
 La résolution spatiale est de 20 m, une image Sentinel 2 se compose d’un peu plus de 30 millions de pixels.
@@ -116,5 +114,5 @@ Réalisé par :
 *	:zombie_man: Thomas GOSSART [(LinkedIn)](https://www.linkedin.com/in/gossartt/)
 
 Supervisé par :
-*	:genie: Thibault VENET [(LinkedIn)](https://www.linkedin.com/in/thibault-venet-49b1b5188/)
+*	:genie: Pierre ADEIKALAM [(LinkedIn)](https://www.linkedin.com/in/data-jesus/)
 
