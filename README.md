@@ -82,10 +82,23 @@ Découpage sur la zone d’intérêt
 
 ## :face_in_clouds: Génération des masques :face_in_clouds:
 La génération du masque se déroule en 4 étapes:
-Préparation d’une image raster de masque construite sur les caractéristiques de l’image Sentinel 2 correspondante et contenant des valeurs nulles. La librairie GDAL contenant le driver “GTiff” a été utilisée. 
-Récupération de la géométrie issue du shapefile correspondant. La librairie OGR contenant le driver “ESRI shapefile” a été utilisée.
-Ajout de la géométrie de la zone brûlée à l’image raster de masque.
-Export de l’image raster de masque en fichier tiff.
+- Préparation d’une image raster de masque construite sur les caractéristiques de l’image Sentinel 2 correspondante et contenant des valeurs nulles. La librairie GDAL contenant le driver “GTiff” a été utilisée. 
+- Récupération de la géométrie issue du shapefile correspondant. La librairie OGR contenant le driver “ESRI shapefile” a été utilisée.
+- Ajout de la géométrie de la zone brûlée à l’image raster de masque.
+- Export de l’image raster de masque en fichier tiff.
+
+## :chart: Pre-processing des données :chart:
+- Verification de la Qualité des données
+- Découpage en patchs
+- Normalisation
+- Augmentation des données
+- Dimensions du dataset d’entrée
+
+## :computer: Modélisation de type “segmentation sémantique” :computer:
+## U-Net
+La modélisation U-net a été proposée dans la publication “U-Net: Convolutional Networks for Biomedical Image Segmentation”. Cette méthode de classification est de type FCNN “Fully Convolutional Neural Network”, c'est-à-dire sans couches fully connected.
+
+L’architecture U-Net semble pertinente pour la segmentation d’images satellites. En effet, ce type de modélisation a démontré de bons résultats pour des tâches similaires et pour des bases de données d'entraînement peu fournies.
 
 
 ## :bookmark_tabs: Description des fichiers :bookmark_tabs:
