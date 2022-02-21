@@ -49,6 +49,43 @@ On pourra également utiliser les bandes du visible et du proche infrarouge à 1
 
   ![spatial.jpg](https://user-images.githubusercontent.com/31386060/154951088-ab7d9541-b3e1-4021-afa2-87aba9d9bc46.png)
  
+## :earth_americas: Description des données d'évenements de feux :earth_americas:
+En tant que référence pour établir les datasets de training / validation / test, nous avons utilisé deux ressources principales :
+
+- Pour la partie nord américaine: “Fire Perimeters in California Database CAL FIRE, provided by the Fire and Resource Assessment Program (FRAP)”
+
+- Pour la partie Européenne, nous avons exploité la base de données des feux au Portugal de l’institut INCF.
+
+Pour chaque source, il était possible de télécharger un fichier shapefile contenant l’ensemble des incendies. L’outil QGIS a permis de contrôler les géométries puis de récupérer les géométries de chaque zone brûlée dans un fichier dédié.
+
+Ces périmètres vont nous aider à récupérer les images correspondant aux événements dans des limites d’emprises pertinentes, mais aussi à construire le jeu d'entraînement et à contrôler nos résultats.
+
+
+## :hotsprings:Sélection des incendies pour la base de données d'entraînement :hotsprings:
+La lecture des bases de données Shapefile de la Californie et du Portugal permet d’obtenir un “Geo-dataframe pandas” qui est une extension du dataframe Pandas avec un géo-référencement de chaque observation.
+Pour chaque évènement, nous avons donc une colonne avec le périmètre de zones brûlées sous la forme d’une liste de polygones définis par des coordonnées
+A l’issue de la récupération des Shapefiles contenant plusieurs centaines d’incendies, nous avons scripté l’extraction des éléments suivant : longitude_1 et longitude_2, latitude_1 et latitude_2 (afin d’obtenir la bounding box en coordonnées GPS), date de début de l’incendie, date de fin de l’incendie (pour dater et faciliter la recherche des images Sentinel 2 pré-fire et post-fire). Ces informations permettent de solliciter le service Google Earth Engine afin de télécharger les images Sentinel 2.
+
+## :globe_with_meridians:Génération des images Sentinel 2 :globe_with_meridians:
+Google Earth Engine est un service fournissant un catalogue d’images satellite et de dataset géo-référencés de plusieurs petabytes. Des capacités d’analyse de la surface de la Terre sont mises à la disposition des chercheurs et développeurs. 
+Ce service gratuit est un bon moyen de collecte des gros volumes de données d’imagerie satellitaire Sentinel 2.
+
+L’extraction des données Sentinel 2 a été codée de la façon suivante:
+
+Requête du catalogue Sentinel 2
+Filtrage sur la zone d’intérêt via les coordonnées GPS issues du géo-dataframe
+Filtrage sur la période d’intérêt issue du géo-dataframe
+Filtrage sur les images contenant moins de 10% de couverture nuageuse
+Filtrage sur les bandes du capteur (3 canaux RGB + 2 infra-rouge NIR, SWI). D’après certaines publications, le choix de ces 5 fréquences produit en effet les meilleures performances de classification.
+Reconstruction et fusion d’une mosaïque d’images (par empilement)
+Découpage sur la zone d’intérêt
+
+## :face_in_clouds: Génération des masques :face_in_clouds:
+La génération du masque se déroule en 4 étapes:
+Préparation d’une image raster de masque construite sur les caractéristiques de l’image Sentinel 2 correspondante et contenant des valeurs nulles. La librairie GDAL contenant le driver “GTiff” a été utilisée. 
+Récupération de la géométrie issue du shapefile correspondant. La librairie OGR contenant le driver “ESRI shapefile” a été utilisée.
+Ajout de la géométrie de la zone brûlée à l’image raster de masque.
+Export de l’image raster de masque en fichier tiff.
 
 
 ## :bookmark_tabs: Description des fichiers :bookmark_tabs:
