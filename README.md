@@ -47,7 +47,7 @@ Le capteur Sentinel 2 (MSI) permet de réaliser des acquisitions dans 13 bandes 
 Le calcul de l’indice permettant de détecter les zones brûlées fera appel aux bandes 7 (NIR) et 12 (SWIR), toutes les deux à 20 m de résolution spatiale.
 On pourra également utiliser les bandes du visible et du proche infrarouge à 10m (2,3,4 et 8) pour réaliser des compositions colorées permettant d’analyser visuellement les territoires à traiter ainsi que de calculer d’autres indices en lien avec la densité de végétation tels que le NDVI.
 
-  ![spatial.jpg](https://user-images.githubusercontent.com/31386060/154951088-ab7d9541-b3e1-4021-afa2-87aba9d9bc46.png)
+![image](https://user-images.githubusercontent.com/31386060/155057380-e61428af-56c1-4fcb-bf75-e28a9e670619.png)
  
 ## :earth_americas: Description des données d'évenements de feux :earth_americas:
 En tant que référence pour établir les datasets de training / validation / test, nous avons utilisé deux ressources principales :
