@@ -2,6 +2,7 @@
 
 ## :mage: Contexte :mage:
 ![Datascientest_logo](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image6.png)
+
 Ce projet a été réalisé dans le cadre de la formation Data Scientist de [Datascientest](https://datascientest.com/) (promotion continue Juin 2021) 
 
 ## :dart: Objectif :dart:
