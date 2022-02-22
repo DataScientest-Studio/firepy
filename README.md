@@ -65,6 +65,9 @@ Ces périmètres vont nous aider à récupérer les images correspondant aux év
 
 ## :hotsprings:Sélection des incendies pour la base de données d'entraînement :hotsprings:
 La lecture des bases de données Shapefile de la Californie et du Portugal permet d’obtenir un “Geo-dataframe pandas” qui est une extension du dataframe Pandas avec un géo-référencement de chaque observation.
+
+![geodf](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image11.png?raw=true)
+
 Pour chaque évènement, nous avons donc une colonne avec le périmètre de zones brûlées sous la forme d’une liste de polygones définis par des coordonnées
 A l’issue de la récupération des Shapefiles contenant plusieurs centaines d’incendies, nous avons scripté l’extraction des éléments suivant : longitude_1 et longitude_2, latitude_1 et latitude_2 (afin d’obtenir la bounding box en coordonnées GPS), date de début de l’incendie, date de fin de l’incendie (pour dater et faciliter la recherche des images Sentinel 2 pré-fire et post-fire). Ces informations permettent de solliciter le service Google Earth Engine afin de télécharger les images Sentinel 2.
 
@@ -74,13 +77,15 @@ Ce service gratuit est un bon moyen de collecte des gros volumes de données d�
 
 L’extraction des données Sentinel 2 a été codée de la façon suivante:
 
+![image](https://user-images.githubusercontent.com/31386060/155056296-37279b72-e34a-4485-a032-bb3bfce3208d.png)
+
 Requête du catalogue Sentinel 2
-Filtrage sur la zone d’intérêt via les coordonnées GPS issues du géo-dataframe
-Filtrage sur la période d’intérêt issue du géo-dataframe
-Filtrage sur les images contenant moins de 10% de couverture nuageuse
-Filtrage sur les bandes du capteur (3 canaux RGB + 2 infra-rouge NIR, SWI). D’après certaines publications, le choix de ces 5 fréquences produit en effet les meilleures performances de classification.
-Reconstruction et fusion d’une mosaïque d’images (par empilement)
-Découpage sur la zone d’intérêt
+- Filtrage sur la zone d’intérêt via les coordonnées GPS issues du géo-dataframe
+- Filtrage sur la période d’intérêt issue du géo-dataframe
+- Filtrage sur les images contenant moins de 10% de couverture nuageuse
+- Filtrage sur les bandes du capteur (3 canaux RGB + 2 infra-rouge NIR, SWI). D’après certaines publications, le choix de ces 5 fréquences produit en effet les meilleures performances de classification.
+- Reconstruction et fusion d’une mosaïque d’images (par empilement)
+- Découpage sur la zone d’intérêt
 
 ## :face_in_clouds: Génération des masques :face_in_clouds:
 La génération du masque se déroule en 4 étapes:
@@ -89,9 +94,12 @@ La génération du masque se déroule en 4 étapes:
 - Ajout de la géométrie de la zone brûlée à l’image raster de masque.
 - Export de l’image raster de masque en fichier tiff.
 
+![image2](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image8.png?raw=true)
+
+
 ## :chart: Pre-processing des données :chart:
-- Verification de la Qualité des données
-- Découpage en patchs
+- Verification de la Qualité des données (présence de fumée/neige/erreur de labellisation)
+- Découpage en patchs : (𝑛𝑏 𝑏𝑎𝑡𝑐ℎ, 𝑛𝑏 𝑝𝑖𝑥𝑒𝑙𝑠 ℎ𝑎𝑢𝑡𝑒𝑢𝑟, 𝑛𝑏 𝑝𝑖𝑥𝑒𝑙𝑠 𝑙𝑎𝑟𝑔𝑒𝑢𝑟, 𝑛𝑏 𝑐𝑎𝑛𝑎𝑢𝑥) soit : (32, 256, 256, 5)
 - Normalisation
 - Augmentation des données
 - Dimensions du dataset d’entrée
@@ -102,9 +110,30 @@ La modélisation U-net a été proposée dans la publication “U-Net: Convoluti
 
 L’architecture U-Net semble pertinente pour la segmentation d’images satellites. En effet, ce type de modélisation a démontré de bons résultats pour des tâches similaires et pour des bases de données d'entraînement peu fournies.
 
+![image_unet](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image12.png?raw=true)
+
+![image](https://user-images.githubusercontent.com/31386060/155056814-e708519e-fa47-46c3-b90a-45bf4904f97e.png)
+![image](https://user-images.githubusercontent.com/31386060/155056833-8730237c-7d3f-4470-a4b6-5c17b1e210e9.png)
+![image](https://user-images.githubusercontent.com/31386060/155056790-e3b1591b-d617-48b2-b571-51260a77fe8e.png)
+
+## PSP-Net
+Afin de confronter le modèle U-Net, il a été proposé (suite à plusieurs articles et Githubs mettant en avant ce modèle dans la segmentation d’images satellite) d’utiliser le modèle PSPNet (Pyramid Scene Parsing Network).
+
+![image](https://user-images.githubusercontent.com/31386060/155057002-94959f73-2123-4ada-9739-4b66fd4b02a3.png)
+
+
+La difficulté réside dans le fait que ce modèle peut s'avérer puissant mais uniquement sur des images constituées de 3 bandes (RGB) et devient trop gourmand en ressources sur nos fichiers en 5 bandes car là où le modèle U-Net nécessite 1,941,393 paramètres, le PSP requiert 31,203,073 paramètres.
+La modélisation a été effectuée sur l’ensemble des données en Patch, mais s’est vite soldée par un échec car la RAM disponible sur les serveurs Colab n’était pas suffisante.
+Afin de tout de même lui laisser ses chances, nous avons procédé à un redimensionnement des images afin d'alléger la charge mais les résultats n’étaient pas concluants non plus (nous pouvons constater que la prédiction a des artefacts et n’est pas aussi précise que pour le modèle U-Net)
+
+![image](https://user-images.githubusercontent.com/31386060/155057035-a1190556-612e-45f7-9db0-6e152228c2d1.png)
+
 
 ## :bookmark_tabs: Description des fichiers :bookmark_tabs:
--	
+-	1a_data_export.ipynb
+-	1b_patches_generation.ipynb
+-	2c_Unet_model_training_with_patches&albumentation.ipynb
+-	2d_PSPNet_model_training_resize.ipynb.ipynb
 
 
 
