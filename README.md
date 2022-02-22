@@ -1,7 +1,7 @@
 # :fire: Projet FirePy :fire:
 
 ## :mage: Contexte :mage:
-![https://github.com/DataScientest-Studio/firepy/blob/main/resources/image6.png]
+![Datascientest_logo](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image6.png)
 Ce projet a été réalisé dans le cadre de la formation Data Scientist de [Datascientest](https://datascientest.com/) (promotion continue Juin 2021) 
 
 ## :dart: Objectif :dart:
@@ -54,6 +54,8 @@ En tant que référence pour établir les datasets de training / validation / te
 - Pour la partie nord américaine: “Fire Perimeters in California Database CAL FIRE, provided by the Fire and Resource Assessment Program (FRAP)”
 
 - Pour la partie Européenne, nous avons exploité la base de données des feux au Portugal de l’institut INCF.
+
+![Shapefile](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image25.png?raw=true)
 
 Pour chaque source, il était possible de télécharger un fichier shapefile contenant l’ensemble des incendies. L’outil QGIS a permis de contrôler les géométries puis de récupérer les géométries de chaque zone brûlée dans un fichier dédié.
 
