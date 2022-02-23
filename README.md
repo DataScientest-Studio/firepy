@@ -128,6 +128,24 @@ Afin de tout de même lui laisser ses chances, nous avons procédé à un redime
 
 ![image](https://user-images.githubusercontent.com/31386060/155057035-a1190556-612e-45f7-9db0-6e152228c2d1.png)
 
+## Prédiction sur de nouvelles images
+
+Le modèle appris sur le dataset d'entraînement peut être appliqué à de nouvelles images. 
+
+Cette tâche de prédiction se déroule en 3 étapes:
+1. Découpage d’une image Sentinel 2 en patchs de 256 par 256 pixels
+2. Prédiction des zones brûlées sur chaque patch à l’aide du modèle
+3. Reconstitution d’une prédiction globale à partir des patchs prédits
+
+Pour la dernière étape, 2 méthodes ont été mise en oeuvre:
+Juxtaposition des patchs prédits. Le modèle est appliqué sur chaque patch et les résultats sont simplement collés en respectant l’ordre du découpage. Cette technique est disponible via la méthode unpatchify du package patchify. Bien que rapide, cette méthode fait apparaître des artéfacts sur les bords de chaque bord. Le modèle a en effet plus de difficultés à apprendre près des bords. De plus, les prédictions ne sont possibles que sur un nombre fini de patchs, ce qui peut exclure une partie de l’image. Voir image en bas à gauche.
+“Smoothed blending” des patchs prédits. Dans cet algorithme, le modèle est appliqué sur une fenêtre glissante de l’image satellite avec un overlap entre chaque tuile. Ensuite, les résultats de prédiction sont recombinés ensemble avec une interpolation de type spline. L’algorithme utilisé est issu d’un projet open source (https://github.com/Vooban/Smoothly-Blend-Image-Patches). Bien que nécessitant plus de temps de calcul, cette méthode est plus performante et les images produites sont très réalistes. Voir image en bas à droite.
+
+![image](https://github.com/DataScientest-Studio/firepy/blob/f49526d30c78fbaa1f4356544c7e5d84d3810c2e/resources/U_Net%20Prediction%20result%20on%20California%20imagery.png)
+
+On remarque que le masque de zone brûlée issu de la prédiction est très proche de la vérité terrain. L’affichage de la probabilité de zone brûlée permet de faire apparaître des nuances dans le niveau de brûlure ainsi que des éléments internes (cours d’eau, routes…). Cette nouvelle connaissance est intéressante pour évaluer l'impact du feu sur les points stratégiques de la zone étudiée. Une meilleure gestion des conséquences de l’incendie est alors possible.
+
+
 
 ## :bookmark_tabs: Description des fichiers :bookmark_tabs:
 -	1a_data_export.ipynb
