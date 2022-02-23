@@ -35,7 +35,7 @@ La nature des données d’entrée a nécessité une montée en compétences sur
 Enfin, afin de pouvoir travailler en collaboratif sur un environnement permettant les calculs de deep learning, nous avons utilisé les outils Google (Drive, Colab, Google Earth Engine) ainsi qu’un espace Github dédié.
 
 
-## :page_with_curl: Description des données des satellites Sentinel 2 :page_with_curl:
+## :satellite: Description des données des satellites Sentinel 2 :satellite:
 Les satellites Sentinel 2A et 2B réalisent des acquisitions dans le domaine optique depuis 2015 (https://fr.wikipedia.org/wiki/Sentinel-2 ). Financées par le programme européen Copernicus, ces missions permettent de produire des images entièrement libres sans restriction d’usage ou de profil d’utilisateur (https://sentinel2.cnes.fr/fr).
 La résolution spatiale est de 20 m, une image Sentinel 2 se compose d’un peu plus de 30 millions de pixels.
 L’ensemble des caractéristiques techniques des images Sentinel 2 est présenté ici : 
@@ -128,7 +128,7 @@ Afin de tout de même lui laisser ses chances, nous avons procédé à un redime
 
 ![image](https://user-images.githubusercontent.com/31386060/155057035-a1190556-612e-45f7-9db0-6e152228c2d1.png)
 
-## Prédiction sur de nouvelles images
+## :mag: Prédiction sur de nouvelles images :mag:
 
 Le modèle appris sur le dataset d'entraînement peut être appliqué à de nouvelles images. 
 
@@ -161,7 +161,7 @@ Le Google Drive du projet contient les fichiers de sauvegarde de nos modèles de
 ## :computer: Réalisation :computer:
 Réalisé par :
 *	:fairy_woman: Emmanuelle CANO [(LinkedIn)](https://www.linkedin.com/in/emmanuelle-cano-4b845940/)
-*	:: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/francois-faupin/)
+*	:sunglasses: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/francois-faupin/)
 *	:zombie_man: Thomas GOSSART [(LinkedIn)](https://www.linkedin.com/in/gossartt/)
 
 Supervisé par :
