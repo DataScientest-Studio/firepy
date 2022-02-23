@@ -143,7 +143,7 @@ Le Google Drive du projet contient les fichiers de sauvegarde de nos modèles de
 ## :computer: Réalisation :computer:
 Réalisé par :
 *	:fairy_woman: Emmanuelle CANO [(LinkedIn)](https://www.linkedin.com/in/emmanuelle-cano-4b845940/)
-*	:superhero_man: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/fran%C3%A7ois-faupin-03259418/)
+*	:: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/francois-faupin/)
 *	:zombie_man: Thomas GOSSART [(LinkedIn)](https://www.linkedin.com/in/gossartt/)
 
 Supervisé par :
