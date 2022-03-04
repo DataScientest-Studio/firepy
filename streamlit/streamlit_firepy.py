@@ -10,6 +10,9 @@ import rasterio as rio
 import tifffile
 import numpy as np
 from pyproj import Proj, transform
+import tensorflow as tf
+from smooth_blending import predict_img_with_smooth_windowing
+from unet_model import simple_unet_model
 
 # Sentinel 2 image path
 sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
@@ -40,11 +43,35 @@ arr = np.moveaxis(arr, 0, -1)
 image_rgb = arr[:, :, :3]
 image_rgb = image_rgb[:, :, ::-1] * 10
 
+
+def predict(arr):
+    # Loading a pre-trained model
+    model = simple_unet_model(256, 256, 5)
+    model.load_weights(
+        './streamlit/saved_model/model_patches_20220130bis.hdf5')
+
+    predictions_smooth = predict_img_with_smooth_windowing(
+        arr,
+        window_size=256,
+        # Minimal amount of overlap for windowing. Must be an even number.
+        subdivisions=2,
+        nb_classes=1,
+        pred_func=(
+            lambda img_batch_subdiv: model.predict((img_batch_subdiv))
+        )
+    )
+    return predictions_smooth[:, :, 0]
+
+
 # Adding the UI components for the user
 st.title("FirePy demo")
 
 zoom_slider = st.sidebar.slider(
-    'Map zoom', 0.0, 20.0, 10.0)
+    'Map zoom', 5.0, 15.0, 10.0)
+
+# Showing the map centered on San Jose GPS coordinates
+map_california = folium.Map(location=[34, -116.8],
+                            zoom_start=zoom_slider)
 
 select_fire_events = st.sidebar.selectbox(
     "Select a fire event",
@@ -53,12 +80,6 @@ select_fire_events = st.sidebar.selectbox(
 
 sentinel2_opacity_slider = st.sidebar.slider(
     'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
-
-prediction_button = st.sidebar.button("Generate the burnt area prediction")
-
-# Showing the map centered on San Jose GPS coordinates
-map_california = folium.Map(location=[34, -116.8],
-                            zoom_start=zoom_slider)
 
 # Adding the Sentinel 2 image
 image = folium.raster_layers.ImageOverlay(
@@ -70,6 +91,29 @@ image = folium.raster_layers.ImageOverlay(
     opacity=sentinel2_opacity_slider
 )
 image.add_to(map_california)
+
+prediction_button = st.sidebar.button("Predict the burnt area")
+prediction_boolean = False
+if prediction_button:
+    prediction_smooth_img = predict(arr)
+    prediction_boolean = True
+    st.session_state.prediction = prediction_smooth_img
+
+prediction_opacity_slider = st.sidebar.slider(
+    'Opacity of the prediction overlay', 0.0, 1.0, 0.5)
+
+if 'prediction' in st.session_state:
+    saved_result = st.session_state.prediction
+    # Adding the prediction image
+    image_prediction = folium.raster_layers.ImageOverlay(
+        name="Prediction image",
+        image=saved_result,
+        bounds=bbox,
+        interactive=True,
+        zindex=2,
+        opacity=prediction_opacity_slider
+    )
+    image_prediction.add_to(map_california)
 
 # Display the map
 folium_static(map_california)
