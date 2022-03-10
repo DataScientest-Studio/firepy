@@ -14,8 +14,36 @@ import tensorflow as tf
 from smooth_blending import predict_img_with_smooth_windowing
 from unet_model import simple_unet_model
 
+select_fire_events = st.sidebar.selectbox(
+    "Select a fire event",
+    ("Fire_1", "Fire_2", "Fire_3")
+)
+
+sentinel2_opacity_slider = st.sidebar.slider(
+    'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
+
+if select_fire_events == "Fire_1": 
+    st.title("Incendie n°1 :")
+    st.write(" ")
+    st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
+    
+ 
+elif select_fire_events == "Fire_2": 
+    st.title("Incendie n°2 :")
+    st.write(" ")
+    st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_321_postFire_RGBIR.tif'
+
+   
+else :
+    st.title("Incendie n°3 :")
+    st.write(" ")
+    st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_8351_postFire_RGBIR.tif'   
+    
 # Sentinel 2 image path
-sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
+
 raster_sentinel2 = rio.open(sentinel2_image_path)
 
 # Bounding box
@@ -73,13 +101,7 @@ zoom_slider = st.sidebar.slider(
 map_california = folium.Map(location=[34, -116.8],
                             zoom_start=zoom_slider)
 
-select_fire_events = st.sidebar.selectbox(
-    "Select a fire event",
-    ("Fire 1", "Fire 1", "Fire 3")
-)
 
-sentinel2_opacity_slider = st.sidebar.slider(
-    'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
 
 # Adding the Sentinel 2 image
 image = folium.raster_layers.ImageOverlay(
@@ -116,4 +138,5 @@ if 'prediction' in st.session_state:
     image_prediction.add_to(map_california)
 
 # Display the map
-folium_static(map_california)
+folium_static(map_california)    
+
