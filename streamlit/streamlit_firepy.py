@@ -16,34 +16,48 @@ from unet_model import simple_unet_model
 
 select_fire_events = st.sidebar.selectbox(
     "Select a fire event",
-    ("Fire_1", "Fire_2", "Fire_3")
+    ("Fire_1", "Fire_2", "Fire_3", "Airport fire 2022-02-16"),
+    index=3
 )
 
 sentinel2_opacity_slider = st.sidebar.slider(
     'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
 
-if select_fire_events == "Fire_1": 
+if select_fire_events == "Fire_1":
     st.title("Incendie n°1 :")
     st.write(" ")
     st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
     sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
-    
- 
-elif select_fire_events == "Fire_2": 
+    if 'prediction' in st.session_state:
+        del st.session_state['prediction']
+
+elif select_fire_events == "Fire_2":
     st.title("Incendie n°2 :")
     st.write(" ")
-    st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+    st.subheader("The fire started on 16th of February")
     sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_321_postFire_RGBIR.tif'
+    if 'prediction' in st.session_state:
+        del st.session_state['prediction']
 
-   
-else :
+elif select_fire_events == "Airport fire 2022-02-16":
+    st.title("Incendie n°4 :")
+    st.write(" ")
+    st.subheader("The fire started on 16th of February 2022")
+    st.subheader("The burnt area is 1674 ha")
+    st.subheader("The road closures: Warm Springs Road east of Hwy 395")
+    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_Airport_postFire_RGBIR.tif'
+    if 'prediction' in st.session_state:
+        del st.session_state['prediction']
+
+else:
     st.title("Incendie n°3 :")
     st.write(" ")
     st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
-    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_8351_postFire_RGBIR.tif'   
-    
-# Sentinel 2 image path
+    sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_8351_postFire_RGBIR.tif'
+    if 'prediction' in st.session_state:
+        del st.session_state['prediction']
 
+# Sentinel 2 image open
 raster_sentinel2 = rio.open(sentinel2_image_path)
 
 # Bounding box
@@ -57,6 +71,9 @@ gps_bounding_box = [longitude1, latitude1, longitude2, latitude2]
 
 bbox = [[gps_bounding_box[1], gps_bounding_box[0]],
         [gps_bounding_box[3], gps_bounding_box[2]]]
+
+center_of_bbox = [(gps_bounding_box[1] + gps_bounding_box[3]) / 2,
+                  (gps_bounding_box[0] + gps_bounding_box[2]) / 2]
 
 # Array data
 arr = raster_sentinel2.read()
@@ -98,10 +115,8 @@ zoom_slider = st.sidebar.slider(
     'Map zoom', 5.0, 15.0, 10.0)
 
 # Showing the map centered on San Jose GPS coordinates
-map_california = folium.Map(location=[34, -116.8],
+map_california = folium.Map(location=center_of_bbox,
                             zoom_start=zoom_slider)
-
-
 
 # Adding the Sentinel 2 image
 image = folium.raster_layers.ImageOverlay(
@@ -121,8 +136,9 @@ if prediction_button:
     prediction_boolean = True
     st.session_state.prediction = prediction_smooth_img
 
-prediction_opacity_slider = st.sidebar.slider(
-    'Opacity of the prediction overlay', 0.0, 1.0, 0.5)
+if 'prediction' in st.session_state:
+    prediction_opacity_slider = st.sidebar.slider(
+        'Opacity of the prediction overlay', 0.0, 1.0, 0.5)
 
 if 'prediction' in st.session_state:
     saved_result = st.session_state.prediction
@@ -138,5 +154,4 @@ if 'prediction' in st.session_state:
     image_prediction.add_to(map_california)
 
 # Display the map
-folium_static(map_california)    
-
+folium_static(map_california)
