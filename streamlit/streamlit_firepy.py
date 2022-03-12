@@ -86,7 +86,7 @@ arr = np.moveaxis(arr, 0, -1)
 
 # Selecting the RGB channels in the right order
 image_rgb = arr[:, :, :3]
-image_rgb = image_rgb[:, :, ::-1] * 10
+image_rgb = image_rgb[:, :, ::-1]
 
 
 def predict(arr):
@@ -108,15 +108,14 @@ def predict(arr):
     return predictions_smooth[:, :, 0]
 
 
-# Adding the UI components for the user
+# Adding the title
 st.title("FirePy demo")
 
-zoom_slider = st.sidebar.slider(
-    'Map zoom', 5.0, 15.0, 10.0)
+# Adding the zoom slider
+zoom_slider = st.sidebar.slider('Map zoom', 5.0, 15.0, 10.0)
 
-# Showing the map centered on San Jose GPS coordinates
-map_california = folium.Map(location=center_of_bbox,
-                            zoom_start=zoom_slider)
+# Showing the map centered on the fire event
+map_california = folium.Map(location=center_of_bbox, zoom_start=zoom_slider)
 
 # Adding the Sentinel 2 image
 image = folium.raster_layers.ImageOverlay(
@@ -129,23 +128,22 @@ image = folium.raster_layers.ImageOverlay(
 )
 image.add_to(map_california)
 
+# Adding the prediction button
 prediction_button = st.sidebar.button("Predict the burnt area")
-prediction_boolean = False
 if prediction_button:
     prediction_smooth_img = predict(arr)
-    prediction_boolean = True
     st.session_state.prediction = prediction_smooth_img
 
+# Adding the prediction opacity slider
 if 'prediction' in st.session_state:
     prediction_opacity_slider = st.sidebar.slider(
         'Opacity of the prediction overlay', 0.0, 1.0, 0.5)
 
+# Adding the prediction image
 if 'prediction' in st.session_state:
-    saved_result = st.session_state.prediction
-    # Adding the prediction image
     image_prediction = folium.raster_layers.ImageOverlay(
         name="Prediction image",
-        image=saved_result,
+        image=st.session_state.prediction,
         bounds=bbox,
         interactive=True,
         zindex=2,
