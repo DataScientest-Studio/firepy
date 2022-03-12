@@ -9,7 +9,7 @@ from streamlit_folium import folium_static
 import rasterio as rio
 import tifffile
 import os
-import inspect 
+import inspect
 import numpy as np
 from pyproj import Proj, transform
 import tensorflow as tf
@@ -18,7 +18,8 @@ from unet_model import simple_unet_model
 
 
 def app():
-    currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+    currentdir = os.path.dirname(os.path.abspath(
+        inspect.getfile(inspect.currentframe())))
     select_fire_events = st.sidebar.selectbox(
         "Select a fire event",
         ("Fire_1", "Fire_2", "Fire_3", "Airport fire 2022-02-16"),
@@ -33,35 +34,31 @@ def app():
         st.write(" ")
         st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
-        if 'prediction' in st.session_state:
-            del st.session_state['prediction']
 
     elif select_fire_events == "Fire_2":
         st.title("Incendie n°2 :")
         st.write(" ")
         st.subheader("The fire started on 16th of February")
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_321_postFire_RGBIR.tif'
-        if 'prediction' in st.session_state:
-            del st.session_state['prediction']
 
     elif select_fire_events == "Airport fire 2022-02-16":
-        st.title("Incendie n°4 :")
         st.write(" ")
         st.image(os.path.join(currentdir, 'ressources/airport_fire.jpg'))
-        st.subheader("The fire started on 16th of February 2022")
         st.subheader("The burnt area is 1674 ha")
         st.subheader("The road closures: Warm Springs Road east of Hwy 395")
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_Airport_postFire_RGBIR.tif'
-        if 'prediction' in st.session_state:
-            del st.session_state['prediction']
 
     else:
         st.title("Incendie n°3 :")
         st.write(" ")
         st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_8351_postFire_RGBIR.tif'
-        if 'prediction' in st.session_state:
+
+    # Reset of the prediction
+    if 'prediction' in st.session_state and 'prediction_name' in st.session_state:
+        if st.session_state.prediction_name != select_fire_events:
             del st.session_state['prediction']
+            del st.session_state['prediction_name']
 
     # Sentinel 2 image open
     raster_sentinel2 = rio.open(sentinel2_image_path)
@@ -92,8 +89,7 @@ def app():
 
     # Selecting the RGB channels in the right order
     image_rgb = arr[:, :, :3]
-    image_rgb = image_rgb[:, :, ::-1] * 10
-
+    image_rgb = image_rgb[:, :, ::-1] * 100
 
     def predict(arr):
         # Loading a pre-trained model
@@ -113,14 +109,14 @@ def app():
         )
         return predictions_smooth[:, :, 0]
 
-
-    # Adding the UI components for the user
+    # Adding the title
     st.title("FirePy demo")
 
+    # Adding the zoom slider
     zoom_slider = st.sidebar.slider(
         'Map zoom', 5.0, 15.0, 10.0)
 
-    # Showing the map centered on San Jose GPS coordinates
+    # Showing the map centered on the fire event
     map_california = folium.Map(location=center_of_bbox,
                                 zoom_start=zoom_slider)
 
@@ -135,23 +131,23 @@ def app():
     )
     image.add_to(map_california)
 
+    # Adding the prediction button
     prediction_button = st.sidebar.button("Predict the burnt area")
-    prediction_boolean = False
     if prediction_button:
         prediction_smooth_img = predict(arr)
-        prediction_boolean = True
         st.session_state.prediction = prediction_smooth_img
+        st.session_state.prediction_name = select_fire_events
 
+    # Adding the prediction opacity slider
     if 'prediction' in st.session_state:
         prediction_opacity_slider = st.sidebar.slider(
             'Opacity of the prediction overlay', 0.0, 1.0, 0.5)
 
+    # Adding the prediction image
     if 'prediction' in st.session_state:
-        saved_result = st.session_state.prediction
-        # Adding the prediction image
         image_prediction = folium.raster_layers.ImageOverlay(
             name="Prediction image",
-            image=saved_result,
+            image=st.session_state.prediction,
             bounds=bbox,
             interactive=True,
             zindex=2,
