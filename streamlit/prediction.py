@@ -22,17 +22,17 @@ def app():
         inspect.getfile(inspect.currentframe())))
     select_fire_events = st.sidebar.selectbox(
         "Select a fire event",
-        ("Fire_1", "Fire_2", "Fire_3", "Airport fire 2022-02-16"),
+        ("Apple fire 2020-07-31", "Fire_2", "Fire_3", "Airport fire 2022-02-16"),
         index=3
     )
 
     sentinel2_opacity_slider = st.sidebar.slider(
         'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
 
-    if select_fire_events == "Fire_1":
-        st.title("Incendie n°1 :")
+    if select_fire_events == "Apple fire 2020-07-31":
+        #        st.title("Incendie n°1 :")
         st.write(" ")
-        st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+#        st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
 
     elif select_fire_events == "Fire_2":
