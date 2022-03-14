@@ -35,24 +35,24 @@ def app():
         st.markdown(f'''<u>FirePy Team</u> :''', unsafe_allow_html=True)  
     with c2:
         logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/linkedin.png'), 'https://www.linkedin.com/in/emmanuelle-cano-4b845940/', 20)
-        st.markdown(f'''<a href="https://www.linkedin.com/in/emmanuelle-cano-4b845940/" style="text-decoration: none;color:white">Emmanuelle CANO</a> {logo_linkedin}''', unsafe_allow_html=True) 
+        st.markdown(f'''<a href="https://www.linkedin.com/in/emmanuelle-cano-4b845940/" style="text-decoration: none;color:ff4b4b">Emmanuelle CANO</a> {logo_linkedin}''', unsafe_allow_html=True) 
     
     c1, c2  = st.columns([0.5, 1])
     with c1:
         st.markdown(f'''''', unsafe_allow_html=True)  
     with c2:
         logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/linkedin.png'), 'https://www.linkedin.com/in/francois-faupin/', 20)
-        st.markdown(f'''<a href="https://www.linkedin.com/in/francois-faupin/" style="text-decoration: none;color:white">François FAUPIN</a> {logo_linkedin}''', unsafe_allow_html=True) 
+        st.markdown(f'''<a href="https://www.linkedin.com/in/francois-faupin/" style="text-decoration: none;color:ff4b4b">François FAUPIN</a> {logo_linkedin}''', unsafe_allow_html=True) 
  
     c1, c2  = st.columns([0.5, 1])
     with c1:
         st.markdown(f'''''', unsafe_allow_html=True)  
     with c2:
         logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/linkedin.png'), 'https://www.linkedin.com/in/gossartt/', 20)
-        st.markdown(f'''<a href="https://www.linkedin.com/in/gossartt/" style="text-decoration: none;color:white">Thomas GOSSART</a> {logo_linkedin}''', unsafe_allow_html=True) 
+        st.markdown(f'''<a href="https://www.linkedin.com/in/gossartt/" style="text-decoration: none;color:ff4b4b">Thomas GOSSART</a> {logo_linkedin}''', unsafe_allow_html=True) 
         
     c1, c2 = st.columns([0.5, 1])
-    c1.markdown(f'''<u>Mentor :</u> :''', unsafe_allow_html=True)  
+    c1.markdown(f'''<u>Mentor :</u>''', unsafe_allow_html=True)  
     logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/linkedin.png'), 'https://www.linkedin.com/in/data-jesus/', 20)
-    c2.markdown(f'''<a href="https://www.linkedin.com/in/data-jesus/" style="text-decoration: none;color:white">Pierre ADEIKALAM</a> {logo_linkedin}''', unsafe_allow_html=True)    
+    c2.markdown(f'''<a href="https://www.linkedin.com/in/data-jesus/" style="text-decoration: none;color:ff4b4b">Pierre ADEIKALAM</a> {logo_linkedin}''', unsafe_allow_html=True)    
 
