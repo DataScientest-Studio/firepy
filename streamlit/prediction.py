@@ -87,11 +87,15 @@ def app():
     image_rgb = arr[:, :, :3]
     image_rgb = image_rgb[:, :, ::-1] * 100
 
-    def predict(arr):
-        # Loading a pre-trained model
+    # Loading the pre-trained model
+    if 'prediction_model' not in st.session_state:
         model = simple_unet_model(256, 256, 5)
         model.load_weights(
             './streamlit/saved_model/model_patches_20220130bis.hdf5')
+        st.session_state.prediction_model = model
+
+    # Prediction function
+    def predict(arr):
 
         predictions_smooth = predict_img_with_smooth_windowing(
             arr,
@@ -100,7 +104,8 @@ def app():
             subdivisions=2,
             nb_classes=1,
             pred_func=(
-                lambda img_batch_subdiv: model.predict((img_batch_subdiv))
+                lambda img_batch_subdiv: st.session_state.prediction_model.predict(
+                    (img_batch_subdiv))
             )
         )
         return predictions_smooth[:, :, 0]
