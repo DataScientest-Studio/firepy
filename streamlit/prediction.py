@@ -18,6 +18,10 @@ from unet_model import simple_unet_model
 
 
 def app():
+
+    # Adding the title
+
+    st.title("FirePy demo")
     currentdir = os.path.dirname(os.path.abspath(
         inspect.getfile(inspect.currentframe())))
     select_fire_events = st.sidebar.selectbox(
@@ -30,9 +34,8 @@ def app():
         'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
 
     if select_fire_events == "Apple fire 2020-07-31":
-        #        st.title("Incendie n°1 :")
-        st.write(" ")
-#        st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
+        st.image(os.path.join(currentdir, 'ressources/apple_fire.jpg'))        
+        st.markdown(f'''<a href="https://www.fire.ca.gov/incidents/2020/7/31/apple-fire/" style="text-decoration: none;color:64a5c3">Click here for complete status</a>''', unsafe_allow_html=True)
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
 
     elif select_fire_events == "Fire_2":
@@ -42,10 +45,9 @@ def app():
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_321_postFire_RGBIR.tif'
 
     elif select_fire_events == "Airport fire 2022-02-16":
-        st.write(" ")
-        st.image(os.path.join(currentdir, 'ressources/airport_fire.jpg'))
-        st.subheader("The burnt area is 1674 ha")
-        st.subheader("The road closures: Warm Springs Road east of Hwy 395")
+        st.image(os.path.join(currentdir, 'ressources/airport_fire.jpg'))        
+        st.markdown(f'''<a href="https://www.fire.ca.gov/incidents/2022/2/16/airport-fire/" style="text-decoration: none;color:64a5c3">Click here for complete status</a>''', unsafe_allow_html=True)
+
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_Airport_postFire_RGBIR.tif'
 
     else:
@@ -109,15 +111,12 @@ def app():
         )
         return predictions_smooth[:, :, 0]
 
-    # Adding the title
-    st.title("FirePy demo")
-
     # Adding the zoom slider
     zoom_slider = st.sidebar.slider(
         'Map zoom', 5.0, 15.0, 10.0)
 
     # Showing the map centered on the fire event
-    map_california = folium.Map(location=center_of_bbox,
+    map_california = folium.Map(location=center_of_bbox,                 
                                 zoom_start=zoom_slider)
 
     # Adding the Sentinel 2 image
