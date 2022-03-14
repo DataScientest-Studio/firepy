@@ -20,41 +20,35 @@ from unet_model import simple_unet_model
 def app():
 
     # Adding the title
-
     st.title("FirePy demo")
+
     currentdir = os.path.dirname(os.path.abspath(
         inspect.getfile(inspect.currentframe())))
+
+    # Adding a drop down menu
     select_fire_events = st.sidebar.selectbox(
         "Select a fire event",
-        ("Apple fire 2020-07-31", "Fire_2", "Fire_3", "Airport fire 2022-02-16"),
-        index=3
+        ("Apple fire 2020-07-31", "Airport fire 2022-02-16"),
+        index=1
     )
 
+    # Adding a Sentinel 2 opacity slider
     sentinel2_opacity_slider = st.sidebar.slider(
         'Opacity of Sentinel 2 overlay', 0.0, 1.0, 1.0)
 
+    # Selectig the desired data
     if select_fire_events == "Apple fire 2020-07-31":
-        st.image(os.path.join(currentdir, 'ressources/apple_fire.jpg'))        
+        st.image(os.path.join(currentdir, 'ressources/apple_fire.jpg'))
         st.markdown(f'''<a href="https://www.fire.ca.gov/incidents/2020/7/31/apple-fire/" style="text-decoration: none;color:64a5c3">Click here for complete status</a>''', unsafe_allow_html=True)
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_185_postFire_RGBIR.tif'
 
-    elif select_fire_events == "Fire_2":
-        st.title("Incendie n°2 :")
-        st.write(" ")
-        st.subheader("The fire started on 16th of February")
-        sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_321_postFire_RGBIR.tif'
-
     elif select_fire_events == "Airport fire 2022-02-16":
-        st.image(os.path.join(currentdir, 'ressources/airport_fire.jpg'))        
+        st.image(os.path.join(currentdir, 'ressources/airport_fire.jpg'))
         st.markdown(f'''<a href="https://www.fire.ca.gov/incidents/2022/2/16/airport-fire/" style="text-decoration: none;color:64a5c3">Click here for complete status</a>''', unsafe_allow_html=True)
-
         sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_Airport_postFire_RGBIR.tif'
 
     else:
-        st.title("Incendie n°3 :")
-        st.write(" ")
-        st.subheader("Incendie ayant eu lieu le XX/XX/XXXX")
-        sentinel2_image_path = './streamlit/test_images/CAL_database_Sentinel2_8351_postFire_RGBIR.tif'
+        st.write('No fire selected')
 
     # Reset of the prediction
     if 'prediction' in st.session_state and 'prediction_name' in st.session_state:
@@ -116,7 +110,7 @@ def app():
         'Map zoom', 5.0, 15.0, 10.0)
 
     # Showing the map centered on the fire event
-    map_california = folium.Map(location=center_of_bbox,                 
+    map_california = folium.Map(location=center_of_bbox,
                                 zoom_start=zoom_slider)
 
     # Adding the Sentinel 2 image
