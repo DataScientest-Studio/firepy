@@ -7,12 +7,12 @@ import folium  # map rendering library
 import streamlit as st
 from streamlit_folium import folium_static
 import rasterio as rio
-import tifffile
+#import tifffile
 import os
 import inspect
 import numpy as np
 from pyproj import Proj, transform
-import tensorflow as tf
+#import tensorflow as tf
 from smooth_blending import predict_img_with_smooth_windowing
 from unet_model import simple_unet_model
 
