@@ -19,8 +19,9 @@ from unet_model import simple_unet_model
 
 def app():
 
-    # Adding the title
+    # Adding the titles
     st.title("FirePy demo")
+    st.sidebar.title("Prediction")
 
     currentdir = os.path.dirname(os.path.abspath(
         inspect.getfile(inspect.currentframe())))
