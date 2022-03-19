@@ -35,7 +35,10 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 [![Image](https://github.com/DataScientest-Studio/firepy/blob/main/resources/streamlit-logo-primary-colormark-darktext.png)](https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py "FirePy demo")
 
 ## :floppy_disk: Google Drive :floppy_disk:
-The backup files and images used to train/test our models are hosted on Google drive because they are too large to be hosted on GitHub. 
+The backup files and images used to train/test our models are hosted on Google drive because they are too large to be hosted on GitHub.
+[![Image](https://github.com/DataScientest-Studio/firepy/blob/main/resources/302-3020172_compress-files-png-winrar-icon-transparent-png.jpg)](https://google.fr "Download all data files") 
+
+
 
 ## :computer: Credits :computer:
 
