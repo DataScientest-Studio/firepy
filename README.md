@@ -36,9 +36,9 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 
 ## :floppy_disk: Google Drive :floppy_disk:
 The backup files and images used to train/test our models are hosted on Google drive because they are too large to be hosted on GitHub.
-[![Image](https://github.com/DataScientest-Studio/firepy/blob/main/resources/302-3020172_compress-files-png-winrar-icon-transparent-png.jpg)](https://google.fr "Download all data files") 
 
-This file contains 27 fires, witch mean almost 1200 patchs (256*256) 
+[![Image](https://github.com/DataScientest-Studio/firepy/blob/main/resources/302-3020172_compress-files-png-winrar-icon-transparent-png.jpg)](https://google.fr "Download all data files") This file contains 27 fires, witch mean almost 1200 patchs (256*256) 
+
 
 Despite the small number of images available, it was decided to favor the data quality.
 Non-quality factors are related to the presence of elements between the burnt area and the satellite sensor.
