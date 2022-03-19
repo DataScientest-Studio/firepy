@@ -47,7 +47,7 @@ Unlike other satellites with an active sensor (radar sending an electromagnetic 
 
 Any unwanted element between the sensor and the burnt area is therefore disturbing for the training of the model.
 
-** The mask generation takes place in 4 steps:** 
+**The mask generation takes place in 4 steps:** 
 
 • Preparation of a mask raster image built on the features of the corresponding Sentinel 2 image and containing null values. The GDAL10 library containing the “GTiff” driver was used.
 
