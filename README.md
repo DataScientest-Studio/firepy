@@ -1,22 +1,49 @@
-# :fire: Projet FirePy :fire:
+# :fire: FirePy Project :fire:
 
-## :mage: Contexte :mage:
+## :mage: Context :mage:
 ![Datascientest_logo](https://github.com/DataScientest-Studio/firepy/blob/main/resources/image6.png)
 
-Ce projet a été réalisé dans le cadre de la formation Data Scientist de [Datascientest](https://datascientest.com/) (promotion continue Juin 2021) 
+This project was made out as part of training course at  [Datascientest.com](https://datascientest.com/) (Data Scientist program June '21) .
 
 ## :dart: Objectif :dart:
-Construction d’un algorithme de détection automatique des zones brûlées (incendie) par Deep-Learning appliqué à des images optiques Sentinel 2.
+Create a deep learning model based on U-Net architecture for semantic segmentation of satellite images (Sentinel-2) to detect burned area.
 
 ## :office_worker: Business case :office_worker:
-Le relevé manuel des périmètres de feu est une tâche fastidieuse et sujette à erreur humaine. Le niveau de détails obtenu est limité car des poches épargnées par les flammes peuvent se trouver à l’intérieur des zones de feu.
+Manual surveying of fire perimeters is a tedious and tiring task and subject to human error. The level could be limited due to pockets spared by the flames found inside the fire zones.
 
-L’automatisation de la détection de surfaces brûlées par un algorithme permettrait d’alléger la charge de travail humaine, d’apporter de la robustesse dans l’analyse et de passer à l’échelle la zone d’analyse et permettrait d’apporter un estimation préliminaire quant aux dégâts (naturels, les biens, les infrastructures). Le traitement mathématique des images satellites est aussi un moyen d’aller au-delà d’une information binaire brûlé / non brûlé et d’affiner le niveau de brûlure.
+The automation of the detection of burnt surfaces by an algorithm would make it possible to lighten the human workload, to bring robustness to the analysis and to scale the analysis area and would make it possible to provide a preliminary estimate of damage (natural, property, infrastructure). Mathematical processing of satellite images is also a way to go beyond burnt/unburnt binary information and refine the burn level.
 
-Les méthodes traditionnelles de détection de zones brûlées ont des performances limitées. En fonctionnant à l’aide de seuils, il est difficile pour ces techniques de détecter des petites zones brûlées ou des brûlures de faible intensité. Certains algorithmes basés sur la détection d'anomalie sur le voisinage de pixels ont un taux élevé de fausse détection. Enfin, les méthodes exploitant les différences dans les séquences d’image dans le temps ont l’inconvénient de nécessiter beaucoup de données.
-Face à ce constat, les algorithmes de deep learning semblent particulièrement prometteurs et font l’objet de nombreuses recherches et publications.
+Traditional burn area detection methods have limited performance. By operating using thresholds, it is difficult for these techniques to detect small burned areas or low intensity burns. Some algorithms based on anomaly detection on the neighborhood of pixels have a high rate of false detection. Finally, methods exploiting differences in image sequences over time have the disadvantage of requiring a lot of data. Faced with this observation, deep learning algorithms seem particularly promising and are the subject of numerous research and publications.
 
-La bonne disponibilité des données des satellites Sentinel 2 financés par le programme Copernicus de l’ESA est un atout essentiel pour le lancement du projet. En effet, les images sont disponibles gratuitement et couvrent depuis 2015 une grande partie de la surface terrestre.
+The good availability of data from the Sentinel 2 satellites financed by ESA's Copernicus program is an essential asset for the launch of the project. Indeed, the images are available free of charge and have covered a large part of the earth's surface since 2015.
+
+
+## :bookmark_tabs: Description des fichiers :bookmark_tabs:
+-	1a_data_export.ipynb
+-	1b_patches_generation.ipynb
+-	2c_Unet_model_training_with_patches&albumentation.ipynb
+-	2d_PSPNet_model_training_resize.ipynb.ipynb
+
+## Streamlit demo
+
+[Demo](https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py)
+
+## :floppy_disk: Google Drive :floppy_disk:
+The backup files and images used to train/test our models are hosted on Google drive because they are too large to be hosted on GitHub. 
+
+## :computer: Credits :computer:
+
+*	:fairy_woman: Emmanuelle CANO [(LinkedIn)](https://www.linkedin.com/in/emmanuelle-cano-4b845940/)
+*	:sunglasses: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/francois-faupin/)
+*	:zombie_man: Thomas GOSSART [(LinkedIn)](https://www.linkedin.com/in/gossartt/)
+
+Mentor :
+*	:genie: Pierre ADEIKALAM [(LinkedIn)](https://www.linkedin.com/in/data-jesus/)
+
+
+
+
+
 
 
 
@@ -147,23 +174,5 @@ On remarque que le masque de zone brûlée issu de la prédiction est très proc
 
 
 
-## :bookmark_tabs: Description des fichiers :bookmark_tabs:
--	1a_data_export.ipynb
--	1b_patches_generation.ipynb
--	2c_Unet_model_training_with_patches&albumentation.ipynb
--	2d_PSPNet_model_training_resize.ipynb.ipynb
 
-
-
-## :floppy_disk: Google Drive :floppy_disk:
-Le Google Drive du projet contient les fichiers de sauvegarde de nos modèles de classication entraînés, trop volumineux pour être hébergés sur GitHub. 
-
-## :computer: Réalisation :computer:
-Réalisé par :
-*	:fairy_woman: Emmanuelle CANO [(LinkedIn)](https://www.linkedin.com/in/emmanuelle-cano-4b845940/)
-*	:sunglasses: François FAUPIN [(LinkedIn)](https://www.linkedin.com/in/francois-faupin/)
-*	:zombie_man: Thomas GOSSART [(LinkedIn)](https://www.linkedin.com/in/gossartt/)
-
-Supervisé par :
-*	:genie: Pierre ADEIKALAM [(LinkedIn)](https://www.linkedin.com/in/data-jesus/)
 
