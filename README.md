@@ -24,7 +24,7 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 -	2c_Unet_model_training_with_patches&albumentation.ipynb
 -	2d_PSPNet_model_training_resize.ipynb.ipynb
 
-## Streamlit demo
+## :cloud: Streamlit demo :cloud:
 
 ![https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py](https://github.com/DataScientest-Studio/firepy/blob/main/resources/streamlit-logo-primary-colormark-darktext.png)
 
