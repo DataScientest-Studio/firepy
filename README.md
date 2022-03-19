@@ -18,7 +18,7 @@ Traditional burn area detection methods have limited performance. By operating u
 The good availability of data from the Sentinel 2 satellites financed by ESA's Copernicus program is an essential asset for the launch of the project. Indeed, the images are available free of charge and have covered a large part of the earth's surface since 2015.
 
 
-## :bookmark_tabs: Description des fichiers :bookmark_tabs:
+## :bookmark_tabs: Files Descriptions :bookmark_tabs:
 -	1a_data_export.ipynb
 -	1b_patches_generation.ipynb
 -	2c_Unet_model_training_with_patches&albumentation.ipynb
@@ -26,7 +26,7 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 
 ## Streamlit demo
 
-[Demo](https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py)
+[Demo](https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py)![https://share.streamlit.io/icecore013/firepy/main/streamlit/index.py](https://github.com/DataScientest-Studio/firepy/blob/main/resources/streamlit-logo-primary-colormark-darktext.png)
 
 ## :floppy_disk: Google Drive :floppy_disk:
 The backup files and images used to train/test our models are hosted on Google drive because they are too large to be hosted on GitHub. 
