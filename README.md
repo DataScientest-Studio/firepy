@@ -47,10 +47,10 @@ Any unwanted element between the sensor and the burnt area is therefore disturbi
 
 **The mask generation takes place in 4 steps:** 
 
-• Preparation of a mask raster image built on the features of the corresponding Sentinel 2 image and containing null values. The GDAL10 library containing the “GTiff” driver was used.
-• Recovery of geometry from the corresponding shapefile. The OGR11 library containing the “ESRI shapefile” driver was used.
-• Added burnt area geometry to mask raster image.
-• Export mask raster image to tiff file.
+- Preparation of a mask raster image built on the features of the corresponding Sentinel 2 image and containing null values. The GDAL10 library containing the “GTiff” driver was used.
+- Recovery of geometry from the corresponding shapefile. The OGR11 library containing the “ESRI shapefile” driver was used.
+- Added burnt area geometry to mask raster image.
+- Export mask raster image to tiff file.
 
 ## :computer: Credits :computer:
 
