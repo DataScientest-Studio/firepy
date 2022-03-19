@@ -23,7 +23,7 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 
 - [![Image2](https://github.com/DataScientest-Studio/firepy/blob/main/resources/colab.svg)](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/1b_patches_generation.ipynb "1b_patches_generation") -	1b_patches_generation.ipynb
 
-[![Image3](https://github.com/DataScientest-Studio/firepy/blob/main/resources/colab.svg)](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/2c_model_training_with_patches%26albumentation.ipynb "2c_Unet_model_training_with_patches&albumentation") -	2c_Unet_model_training_with_patches&albumentation.ipynb 
+- [![Image3](https://github.com/DataScientest-Studio/firepy/blob/main/resources/colab.svg)](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/2c_model_training_with_patches%26albumentation.ipynb "2c_Unet_model_training_with_patches&albumentation") -	2c_Unet_model_training_with_patches&albumentation.ipynb 
 
 - [![Image4](https://github.com/DataScientest-Studio/firepy/blob/main/resources/colab.svg)](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/PSPNet_unaugmented.ipynb "2d_PSPNet_model_training_resize") -	2d_PSPNet_model_training_resize.ipynb 
 
