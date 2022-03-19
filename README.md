@@ -41,21 +41,15 @@ The backup files and images used to train/test our models are hosted on Google d
 This file contains 27 fires, witch mean almost 1200 patchs (256*256) 
 
 Despite the small number of images available, it was decided to favor the data quality.
-
 Non-quality factors are related to the presence of elements between the burnt area and the satellite sensor.
-
 Unlike other satellites with an active sensor (radar sending an electromagnetic wave crossing the elements), the Sentinel-2 images only receive emissions from Earth in different frequencies.
-
 Any unwanted element between the sensor and the burnt area is therefore disturbing for the training of the model.
 
 **The mask generation takes place in 4 steps:** 
 
 • Preparation of a mask raster image built on the features of the corresponding Sentinel 2 image and containing null values. The GDAL10 library containing the “GTiff” driver was used.
-
 • Recovery of geometry from the corresponding shapefile. The OGR11 library containing the “ESRI shapefile” driver was used.
-
 • Added burnt area geometry to mask raster image.
-
 • Export mask raster image to tiff file.
 
 ## :computer: Credits :computer:
