@@ -19,10 +19,11 @@ The good availability of data from the Sentinel 2 satellites financed by ESA's C
 
 
 ## :bookmark_tabs: Files Descriptions :bookmark_tabs:
--	1a_data_export.ipynb
--	1b_patches_generation.ipynb
--	2c_Unet_model_training_with_patches&albumentation.ipynb
--	2d_PSPNet_model_training_resize.ipynb.ipynb
+-	1a_data_export.ipynb [![Image1](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/1a_data_export.ipynb "1a")
+-	1b_patches_generation.ipynb[![Image2](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/1b_patches_generation.ipynb "1b_patches_generation")
+-	2c_Unet_model_training_with_patches&albumentation.ipynb [![Image3](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/2c_model_training_with_patches%26albumentation.ipynb "2c_Unet_model_training_with_patches&albumentation")
+-	2d_PSPNet_model_training_resize.ipynb [![Image4](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/PSPNet_unaugmented.ipynb "2d_PSPNet_model_training_resize")
+-	3_model_prediction.ipynb [![Image4](https://colab.research.google.com/github/icecore013/image-segmentation-keras/blob/master/3_model_prediction.ipynb "3_model_prediction")
 
 ## :cloud: Streamlit demo :cloud:
 
