@@ -23,7 +23,7 @@ MENU_ = {
     "Dataset": dataset,
     "Prediction": prediction,
     "About": about,
-    "Conclusion": conclusion
+    "Conclusion": conclusion,
     "Credits": credits
 }
 
