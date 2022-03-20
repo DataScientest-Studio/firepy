@@ -55,4 +55,11 @@ def app():
     c1.markdown(f'''<u>Mentor :</u>''', unsafe_allow_html=True)  
     logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/linkedin.png'), 'https://www.linkedin.com/in/data-jesus/', 20)
     c2.markdown(f'''<a href="https://www.linkedin.com/in/data-jesus/" style="text-decoration: none;color:ff4b4b">Pierre ADEIKALAM</a> {logo_linkedin}''', unsafe_allow_html=True)    
+    
+    c1, c2  = st.columns([0.5, 1])
+    c1.markdown(f'''<u>Github :</u>''', unsafe_allow_html=True)  
+    with c2:
+        logo_linkedin = get_img_with_href(os.path.join(currentdir, 'ressources/25231.png'), 'https://github.com/DataScientest-Studio/firepy', 20)
+        st.markdown(f'''<a href="https://github.com/DataScientest-Studio/firepy" style="text-decoration: none;color:ff4b4b">FirePy</a> {logo_linkedin}''', unsafe_allow_html=True) 
+        
 
