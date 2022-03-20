@@ -40,7 +40,6 @@ selection_page = st.sidebar.radio("", list(MENU_.keys()))
 #st.sidebar.write("Mentor :")
 #st.sidebar.write("[Pierre ADEIKALAM](https://www.linkedin.com/in/data-jesus/)")
 
-st.sidebar.title('Github')
-st.sidebar.write("[FirePy](https://github.com/DataScientest-Studio/firepy)")
+
 page = MENU_[selection_page]
 page.app()
