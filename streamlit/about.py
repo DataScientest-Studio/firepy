@@ -17,7 +17,7 @@ def app():
 
     
     with st.container():
-        c1, c2 = st.columns(2)
+        c1, c2 = st.columns([1.5,0.5])
         with c1:
     
             currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
