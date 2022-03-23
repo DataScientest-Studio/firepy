@@ -1,10 +1,15 @@
-# Creating a u-net model
+"""
+Original code is from DigitalSreeni:
+https://github.com/bnsreenu/python_for_microscopists
+
+"""
+
 from tensorflow import keras
 from keras.models import Model
 from keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate, Conv2DTranspose, BatchNormalization, Dropout, Lambda
-
-# Metrics
 from keras import backend as K
+
+# Classic metrics
 
 
 def recall_m(y_true, y_pred):
@@ -33,7 +38,7 @@ def iou_metric(y_true, y_pred):
     intersection = K.sum(y_true_f * y_pred_f)
     return intersection / (K.sum(y_true_f) + K.sum(y_pred_f) - intersection)
 
-# Custom loss function
+# Dice coefficient
 
 
 def dice_coef(y_true, y_pred):
@@ -43,11 +48,13 @@ def dice_coef(y_true, y_pred):
     intersection = K.sum(y_true_f * y_pred_f)
     return (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
 
+# Custom loss function with 50/50 distribution which is the optimum
+
 
 def bce_dice_loss(y_true, y_pred):
     return 0.5 * keras.losses.binary_crossentropy(y_true, y_pred) + 0.5 * (1 - dice_coef(y_true, y_pred))
 
-# Building the model
+# Time to build the model
 
 
 def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
@@ -55,7 +62,7 @@ def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
     inputs = Input((IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS))
     s = inputs
 
-    # Contraction path
+    # Encoding path
     c1 = Conv2D(16, (3, 3), activation='relu',
                 kernel_initializer='he_normal', padding='same')(s)
     c1 = Dropout(0.1)(c1)
@@ -90,7 +97,7 @@ def simple_unet_model(IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS):
     c5 = Conv2D(256, (3, 3), activation='relu',
                 kernel_initializer='he_normal', padding='same')(c5)
 
-    # Expansive path
+    # Decoding path
     u6 = Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same')(c5)
     u6 = concatenate([u6, c4])
     c6 = Conv2D(128, (3, 3), activation='relu',
